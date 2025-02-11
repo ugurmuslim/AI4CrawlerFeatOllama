@@ -24,3 +24,30 @@ docker compose --profile cpu pull
 docker compose create && docker compose --profile cpu up
 ```
 
+After running the above commands, you can access the agent at `http://localhost:3002/` and the qdrant database at `http://localhost:6333/`.
+
+
+```bash
+curl --request POST \
+  --url http://localhost:3002/init-rag \
+  --header 'Authorization: Bearer secret' \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/10.3.0' \
+  --data '{
+	"url": "https://shopify.dev/docs"
+}'
+```
+
+
+After scraping the data you can give prompts to your ai like below
+
+```bash
+curl --request POST \
+  --url http://localhost:3002/talk-to-ai \
+  --header 'Authorization: Bearer secret' \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/10.3.0' \
+  --data '{
+	"text": "Give me the list of all the endpoints in shopify"
+}'
+```
